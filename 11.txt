@@ -1,5 +1,5 @@
-BARNAME : BAD 
-BAREDGE : 1.1
+BARNAME: BAD 
+BAREDGE: 1.1
 x       dl             id
 0	0.3326		0
 1	0.2925		0
