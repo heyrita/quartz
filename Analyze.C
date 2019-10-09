@@ -4,6 +4,8 @@
 #include "Analyze.h"
 #include <TH2.h>
 #include <TStyle.h>
+#include <TCanvas.h>
+#include <TGraph.h>
 
 //******** Definition section *********
 TGraph* g_xdl = NULL;
@@ -45,5 +47,5 @@ void Analyze::Terminate()
    //******** Wrap-up section *********
    TCanvas *c1= new TCanvas();
    g_xdl->Draw("ap");
-   c1->SaveAs(outputGraph.png);
+   c1->SaveAs("outputGraph.png");
 }
