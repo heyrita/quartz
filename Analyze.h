@@ -27,9 +27,9 @@ public :
    // Readers to access the data (delete the ones you do not need).
    TTreeReaderValue<Double_t> x = {fReader, "x"};
    TTreeReaderValue<Double_t> dl = {fReader, "dl"};
-   TTreeReaderValue<Double_t> id = {fReader, "id"};
-   TTreeReaderArray<Char_t> BarName = {fReader, "BarName"};
-   TTreeReaderValue<Float_t> BarEdge = {fReader, "BarEdge"};
+   //TTreeReaderValue<Double_t> id = {fReader, "id"};
+   //TTreeReaderArray<Char_t> BarName = {fReader, "BarName"};
+   //TTreeReaderValue<Float_t> BarEdge = {fReader, "BarEdge"};
 
 
    Analyze(TTree * /*tree*/ =0) { }
