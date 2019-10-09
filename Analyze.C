@@ -45,5 +45,5 @@ void Analyze::Terminate()
    //******** Wrap-up section *********
    TCanvas *c1= new TCanvas();
    g_xdl->Draw("ap");
-   c1->SaveAs(outputHisto);
+   c1->SaveAs(outputGraph.png);
 }
