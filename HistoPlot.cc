@@ -2,11 +2,8 @@
 //                Date: Tue Oct 8 21:40:34 CEST 2019              //
 //               Autor: Rita Kvitochka                            //
 // Program description: Reading a tree with data and making       //
-//                      a histogram with output file              //
-//                      format. The txt data file contains        //
-//                      information with position and size of the //
-//                      chip edges. The measurements done with    //
-//                      USB-microscope                            //
+//                      a histogram with output file given        //
+//                      format.                         		  //
 ////////////////////////////////////////////////////////////////////
 #include <TH1D.h>
 #include <TStyle.h>
