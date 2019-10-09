@@ -32,7 +32,7 @@ PATHTOSHAREDLIB=$(OUTLIB)
 
 #----------------------------------------------------#
 
-all: makedir convertTXT2root
+all: makedir convertTXT2root HistoPlot
 
 makedir:
 	mkdir -p $(OUTLIB);
@@ -53,6 +53,10 @@ printmakehelp_and_reminder: convertTXT2root.cc  Makefile
 convertTXT2root: convertTXT2root.cc
 	$(CXX) -o $@ $< $(CXXFLAGS)
 
+HistoPlot: HistoPlot.cc
+	$(CXX) -o $@ $< $(CXXFLAGS)
+
 clean: 
 	rm -f *~
 	rm -f convertTXT2root
+	rm -f HistoPlot
