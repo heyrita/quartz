@@ -67,6 +67,15 @@ void convertTXT2root(TString inputDataFile, TString outputrootFile) {
   
   ifstream indata;
   indata.open(inputDataFile.Data()); 
+  if (indata.is_open())
+  {
+    cout<< "File successfully open\n";
+  }
+  else
+  {
+    cout << "Error opening file";
+  }
+  
   ////////////////
 
   TFile *hfile = new TFile( outputrootFile, "RECREATE", "Ineffective area", 1);
