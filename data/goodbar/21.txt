@@ -1,0 +1,7 @@
+BARNAME: GOOD
+BAREDGE: 2.1
+x       dl             id
+0	0.1		0
+1	0		0
+400	0		0
+
