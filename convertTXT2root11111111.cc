@@ -1,9 +1,22 @@
+////////////////////////////////////////////////////////////////////
+//                Date: Thu Oct  3 21:02:34 CEST 2019             //
+//               Autor: Rita Kvitochka                            //
+// Program description: Convertion of the txt data                //
+//                      with measurements into the root           //
+//                      format. The txt data file contains        //
+//                      information with position and size of the //
+//                      chip edges. The measurements done with    //
+//                      USB-microscope                            //
+////////////////////////////////////////////////////////////////////
+
+//root
 #include <TH1D.h>
 #include <TStyle.h>
 #include <TString.h>
 #include <TCanvas.h>
 #include <TFile.h>
 #include <TTree.h>
+#include <TH1D.h>
 
 //C, C++
 #include <stdio.h>
@@ -49,21 +62,12 @@ void convertTXT2root(TString inputDataFile, TString outputrootFile) {
 	
 	Char_t         BarName[4];
 	Float_t        BarEdge;
-  Double_t 		   x, dl, id;
-  string         mot;
- // Int_t          k = 0;
+  	Double_t 	   x, dl, id;
+  	string         mot;
+  	Int_t          k = 0;
   
   ifstream indata;
   indata.open(inputDataFile.Data()); 
-  if (indata.is_open())
-  {
-    cout<< "File successfully open\n";
-  }
-  else
-  {
-    cout << "Error opening file";
-  }
-  
   ////////////////
 
   TFile *hfile = new TFile( outputrootFile, "RECREATE", "Ineffective area", 1);
@@ -74,7 +78,6 @@ void convertTXT2root(TString inputDataFile, TString outputrootFile) {
     exit(-1);
   }
   TTree *tree = new TTree("T", "Quartz measurments R0OOT Data tree");
-  tree->SetMaxTreeSize(10000000000000);
   hfile->SetCompressionLevel(2);
   tree->SetAutoSave(1000000);
   // Create new event
@@ -83,32 +86,28 @@ void convertTXT2root(TString inputDataFile, TString outputrootFile) {
   tree->Branch("x", &x,"x/D");
   tree->Branch("dl", &dl,"dl/D");
   tree->Branch("id", &id,"id/D");
-  tree->Branch("BarName", &BarName,"BarName/C");
+  tree->Branch("BarName", BarName,"BarName/C");
   tree->Branch("BarEdge", &BarEdge,"BarEdge/F");
   ////////////////
-
-	while (indata  >> mot )
+  indata  >> mot;
+  if(mot == "BARNAME:")
   {
-    //k++;
-    //cout<<mot<<endl;
-    //if(k == 3) assert(0);
-    if(mot == "BARNAME:")
-    {
-      indata >> BarName;
-	    cout << BarName << endl;
-      indata >> mot; 
-  	  if(mot == "BAREDGE:")
-      {
-        cout << "1" << endl;
-        indata >> BarEdge;
-        indata >> mot >> mot >> mot >> mot;
-        cout<<mot<<endl;
-   		}
-	  }
-    std::istringstream(mot) >> x;
-    indata>>dl>>id;
-    tree->Fill();
+  indata >> BarName;
+  indata >> mot;
+ 	if(mot == "BAREDGE:")
+ 	{
+    indata >> BarEdge;
+ 	indata >> mot >> mot >> mot;
+    }
   }
+
+  while (indata  >> mot )
+  {
+  indata>>x>>dl>>id;
+  tree->Fill();
+  }
+
+  
 	////////////////////// or ////////////////
 /*while (indata  >> mot ){
     k++;
@@ -125,7 +124,6 @@ void convertTXT2root(TString inputDataFile, TString outputrootFile) {
 } */
 
   indata.close();
-  
   hfile = tree->GetCurrentFile();
   hfile->Write();
   hfile->Close();

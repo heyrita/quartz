@@ -36,7 +36,7 @@ all: makedir convertTXT2root analyzer
 
 makedir:
 	mkdir -p $(OUTLIB);
-	#mkdir -p tmp;
+	mkdir -p tmp;
 
 printmakeinfo:
 	$(info CXX          = "$(CXX)")
@@ -56,7 +56,7 @@ convertTXT2root: convertTXT2root.cc
 HistoPlot: HistoPlot.cc
 	$(CXX) -o $@ $< $(CXXFLAGS)
 
-analyzer: analyzer.c obj/Analyze.o
+analyzer: analyzer.c obj/Analyze.o 
 	$(CXX) -o analyzer analyzer.c $(OUTLIB)*.o $(CXXFLAGS)
 
 obj/Analyze.o: Analyze.C Analyze.h
